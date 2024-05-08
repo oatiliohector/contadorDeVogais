@@ -12,7 +12,13 @@ export class TreinadorPokemon{
         this.equipe = atributos.equipeNome;
     }
 
-    public treinarNovoPokemon(){}
+    public treinarPokemon(){}
 
     public batalharComOutroTreinador(){}
+
+    public capturarPokemon(){}
+
+    public evoluirPokemon(){}
+
+    public treinarHabilidades(){}    
 }
