@@ -1,21 +1,21 @@
-interface IAtaquePokemon{
+interface IAtackPokemon{
     nome: string,
     tipo: string,
     dano: number
 }
 
-export class AtaquePokemon{
+export class AtackPokemon{
     private readonly nome: string;
     private readonly tipo: string;
     private readonly dano: number;
     
-    constructor(atributos: IAtaquePokemon){
+    constructor(atributos: IAtackPokemon){
         this.nome = atributos.nome;
         this.tipo = atributos.tipo;
         this.dano = atributos.dano;
     }
-
-    public calcularDano(tipoDeAtaque: string, atributosPokemonAlvo: string){
+    
+    public calcularDano(tipoDeAtack: string, atributosPokemonAlvo: string){
 
     }
 }
