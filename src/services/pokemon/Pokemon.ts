@@ -19,6 +19,6 @@ export class Pokemon{
     }
 
     public checkPokemon(){
-
+        
     }
 }
