@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/vscode,node
-# Edit at https://www.toptal.com/developers/gitignore?templates=vscode,node
+# Created by https://www.toptal.com/developers/gitignore/api/vscode,node,c++
+# Edit at https://www.toptal.com/developers/gitignore?templates=vscode,node,c++
 
 # compiled output
 /dist
@@ -144,5 +144,85 @@ dist
 ### SO ###
 .DS_Store
 
-# End of https://www.toptal.com/developers/gitignore/api/vscode,node
-yarn.lock
+### C++ ###
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lib
+*.a
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Compiled source files
+*.slo
+*.lo
+*.s
+*.S
+*.mod
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+
+# Visual Studio Code files
+.vscode/
+.vscode/ipch/
+*.code-workspace
+
+# Qt Creator files
+*.creator
+*.creator.user
+*.creator.user.*
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+
+# CodeBlocks files
+*.layout
+*.depend
+*.depend.*
+
+# Other IDEs and tools
+.idea/
+*.swp
+*.class
+*.ncb
+*.suo
+*.opt
+*.plg
+*.orig
+*.xcodeproj
+*.xcworkspace
+*.cproject
+*.project
+
+# Backup files
+*~
+*.bak
+*.swp
+*.swo
+
+# End of https://www.toptal.com/developers/gitignore/api/vscode,node,c++
