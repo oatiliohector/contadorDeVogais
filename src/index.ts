@@ -1,3 +1,4 @@
-import { generateName } from "../src/modules/Personal/nameGenerator";
-
-generateName();
+export * from './nameGenerator'
+export * from './Name'
+export * from './Address'
+export * from './Company'

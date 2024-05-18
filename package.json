@@ -1,10 +1,10 @@
 {
   "name": "eudoxia",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate fake data for tests. And more!",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "type": "module",
+  "main": ".dist/index.js",
+  "module": ".dist/index.mjs",
+  "types": ".dist/index.d.ts",
   "files": [
     "/dist"
   ],
@@ -12,8 +12,12 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsup"
   },
+  "keywords": [
+    "test"
+  ],
   "author": "Heck",
   "license": "MIT",
   "devDependencies": {
@@ -29,6 +33,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "eudoxia": "^1.0.0"
+    "eudoxia": "^1.0.0",
+    "tsup": "^8.0.2"
   }
 }
