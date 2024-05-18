@@ -1,34 +1,93 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
-
-name: Node.js Package
+name: Release and Publish
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/**/*'
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm ci
-      - run: npm test
+  release-and-publish:
+    name: Release and Publish
+    runs-on: ["self-hosted", "vs-colaborador"]
 
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          node-version: 16
-          registry-url: https://registry.npmjs.org/
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          registry-url: 'https://npm.pkg.github.com/'
           scope: '@oatiliohector'
-      - run: npm ci
-      - run: npm publish
+
+      - name: Install Dependencies
+        run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Detect Changed Packages
+        id: changed
+        run: |
+          CHANGED_DIRS=$(git diff --name-only HEAD^ HEAD | grep '^packages/' | awk -F'/' '{print $1"/"$2}' | sort -u | tr '\n' ' ')
+          echo "CHANGED_DIRS=$CHANGED_DIRS" >> $GITHUB_ENV
+
+      - name: Release Changed Packages
+        run: |
+          for DIR in $CHANGED_DIRS; do
+            if [ -d "$DIR" ] && [ -f "$DIR/package.json" ]; then
+              echo "🚀 [Release] Processing $DIR\n"
+              cd $DIR
+
+              export PKG_ROOT=$(node -p "require('./package.json').name")                            
+              npx semantic-release --extends ../../.releaserc.js
+              
+              echo "🚀 Processed release $DIR\n"
+              cd -
+            else
+              echo "🚫 Skipping release to $DIR, not a package directory or no package.json found!"
+            fi
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name : Publish Changed Packages
+        run: |
+          for DIR in $CHANGED_DIRS; do
+            if [ -d "$DIR" ] && [ -f "$DIR/package.json" ]; then
+              echo "🚀 [Publish] Processing $DIR\n"
+              cd $DIR
+
+              NPM_NAME=$(node -p "require('./package.json').name")
+              NPM_VERSION=$(node -p "require('./package.json').version")
+
+              if npm view "$NPM_NAME@$NPM_VERSION" > /dev/null 2>&1; then
+                echo "📦 Unable to publish as the package already exists!"
+              else
+                npm run build
+                npm publish
+
+                echo "🚀 Processed publish $DIR\n"
+              fi
+
+              cd -
+            else
+              echo "🚫 Skipping $DIR, not a package directory or no package.json found"
+            fi
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
