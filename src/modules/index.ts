@@ -1,1 +1,1 @@
-export * from './Personal/nameGenerator'
+export * from '../nameGenerator'
