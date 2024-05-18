@@ -1,6 +1,7 @@
 {
   "name": "eudoxia",
-  "version": "1.0.1",
+  "repository": "https://github.com/oatiliohector/Eudoxia",
+  "version": "1.0.2",
   "description": "Generate fake data for tests. And more!",
   "main": ".dist/index.js",
   "module": ".dist/index.mjs",
@@ -31,6 +32,9 @@
     "semantic-release": "^23.1.1",
     "ts-jest": "^29.1.2",
     "typescript": "^5.4.5"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "tsup": "^8.0.2"
