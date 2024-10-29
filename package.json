@@ -1,42 +1,43 @@
 {
-  "name": "eudoxia",
-  "repository": "https://github.com/oatiliohector/Eudoxia",
-  "version": "1.0.2",
-  "description": "Generate fake data for tests. And more!",
-  "main": ".dist/index.js",
-  "module": ".dist/index.mjs",
-  "types": ".dist/index.d.ts",
-  "files": [
-    "/dist"
-  ],
-  "directories": {
-    "test": "tests"
+  "name": "contadordevogais",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.115",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "test": "jest",
-    "build": "tsup"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "keywords": [
-    "test"
-  ],
-  "author": "Heck",
-  "license": "MIT",
-  "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^10.0.4",
-    "@semantic-release/npm": "^12.0.1",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^20.12.12",
-    "jest": "^29.7.0",
-    "semantic-release": "^23.1.1",
-    "ts-jest": "^29.1.2",
-    "typescript": "^5.4.5"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
-  "dependencies": {
-    "tsup": "^8.0.2"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
